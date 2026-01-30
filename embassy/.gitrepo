@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:embassy-rs/embassy.git
+	branch = main
+	commit = 236278f5d61697960e382bc12fc1189300147be7
+	parent = 47322136b1ab41da171fee29af94699573650ee4
+	method = merge
+	cmdver = 0.4.9
