@@ -1,11 +1,11 @@
 MEMORY {
-    FLASH            : ORIGIN = 0x10000000, LENGTH = 32K    /* 0x8_000 bytes */
-    BOOTLOADER_STATE : ORIGIN = 0x10008000, LENGTH = 4K     /* 0x1_000 bytes */
-    ACTIVE           : ORIGIN = 0x10009000, LENGTH = 1024K  /* 0x100_000 bytes */
-    DFU              : ORIGIN = 0x10109000, LENGTH = 1028K  /* 0x101_000 bytes */
-    RAM : ORIGIN = 0x20000000, LENGTH = 512K
-    SRAM8 : ORIGIN = 0x20080000, LENGTH = 4K
-    SRAM9 : ORIGIN = 0x20081000, LENGTH = 4K
+    FLASH            : ORIGIN = 0x10000000, LENGTH = 64K    /* 0x10_000 bytes */
+    BOOTLOADER_STATE : ORIGIN = 0x10010000, LENGTH = 4K     /* 0x1_000 bytes */
+    ACTIVE           : ORIGIN = 0x10011000, LENGTH = 1024K  /* 0x100_000 bytes */
+    DFU              : ORIGIN = 0x10111000, LENGTH = 1028K  /* 0x101_000 bytes */
+    RAM         : ORIGIN = 0x20000000, LENGTH = 512K
+    SRAM8       : ORIGIN = 0x20080000, LENGTH = 4K
+    SRAM9       : ORIGIN = 0x20081000, LENGTH = 4K
 }
 
 SECTIONS {
