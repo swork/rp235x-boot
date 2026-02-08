@@ -8,6 +8,10 @@ use defmt_rtt as _;
 use embassy_boot_rp::*;
 use embassy_sync::blocking_mutex::Mutex;
 use embassy_time::Duration;
+use embassy_rp::gpio::{Level, Output};
+
+#[cfg(feature = "defmt")]
+use defmt::info;
 
 const FLASH_SIZE: usize = 4 * 1024 * 1024;
 
@@ -17,11 +21,12 @@ fn main() -> ! {
 
     // Uncomment this if you are debugging the bootloader with debugger/RTT attached,
     // as it prevents a hard fault when accessing flash 'too early' after boot.
-    /*
-    for i in 0..10000000 {
-        cortex_m::asm::nop();
+    #[cfg(feature = "defmt")]
+    {
+        for i in 0..1000000 {
+            cortex_m::asm::nop();
+        }
     }
-    */
 
     let flash = WatchdogFlash::<FLASH_SIZE>::start(p.FLASH, p.WATCHDOG, Duration::from_secs(8));
     let flash = Mutex::new(RefCell::new(flash));
@@ -29,6 +34,27 @@ fn main() -> ! {
     let config = BootLoaderConfig::from_linkerfile_blocking(&flash, &flash, &flash);
     let active_offset = config.active.offset();
     let bl: BootLoader = BootLoader::prepare(config);
+
+    let mut led = Output::new(p.PIN_2, Level::Low);
+    defmt::info!("gpio 2 on, by bootloader");
+    led.set_high();
+    /*
+    loop {
+        info!("led on!");
+        led.set_high();
+        for i in 0..200000 {
+            cortex_m::asm::nop();
+        }
+
+        info!("led off!");
+        led.set_low();
+        for i in 0..200000 {
+            cortex_m::asm::nop();
+        }
+    }
+    */
+
+    defmt::info!("Into bl.load...");
 
     unsafe { bl.load(embassy_rp::flash::FLASH_BASE as u32 + active_offset) }
 }

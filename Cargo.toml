@@ -2,6 +2,7 @@
 name = "rp235x-boot"
 version = "0.1.0"
 edition = "2024"
+description = "ste@venclare.work rp235x embassy-boot DFU loader"
 
 [dependencies]
 cfg-if = "1.0.4"

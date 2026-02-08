@@ -1,0 +1,50 @@
+[default.probe]
+protocol = "Swd"
+
+[default.flashing]
+enabled = true
+restore_unwritten_bytes = false
+flash_layout_output_path = "out.svg"
+do_chip_erase = false
+disable_double_buffering = false
+preverify = false
+verify = false
+read_flasher_rtt = false
+
+[default.reset]
+enabled = true
+halt_afterwards = false
+
+[default.general]
+chip = "RP235x"
+chip_descriptions = []
+#   "OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE"
+log_level = "INFO"
+connect_under_reset = false
+
+[nortt.rtt]
+enabled = false
+
+[default.rtt]
+enabled = true
+timeout = 3000
+log_enabled = true
+log_path = "./logs"
+up_channels = [
+    { channel = 0, mode = "BlockIfFull", format = "Defmt", show_location = true, show_timestamps = true },
+    # { channel = 1, mode = "BlockIfFull", format = "String", show_timestamps = false, socket = "127.0.0.1:12345" },
+]
+down_channels = [
+    # { channel = 0, mode = "BlockIfFull" }
+]
+tabs = [
+    # { up_channel = 0, down_channel = 0, name = "My channel" },
+    # { up_channel = 1, hide = true },
+]
+
+[nogdb.gdb]
+enabled = false
+
+[default.gdb]
+enabled = true
+gdb_connection_string = "127.0.0.1:1337"
